@@ -1,0 +1,26 @@
+{
+  "name": "desktop-tutorial",
+  "version": "1.0.0",
+  "description": "This is your README. READMEs are where you can communicate what your project is and how to use it.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/java1777/desktop-tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/java1777/desktop-tutorial/issues"
+  },
+  "homepage": "https://github.com/java1777/desktop-tutorial#readme",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.4"
+  }
+}
