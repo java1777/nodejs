@@ -1,12 +1,14 @@
 import { connect } from "mongoose";
-import { config } from "dotenv";
+import {config } from 'dotenv';
 config();
 
-export async function connectDB (){
+export const connectDb = async ()=>{
     try {
-        await connect(process.env.MONGO_URI);
-        console.log('Database connected');
+       await connect(process.env.MONGO_URI);
+       console.log('connected to db');
+       
     } catch (error) {
-        console.log(error);
+        console.log(`error on connected db :${error.message}`);
+        
     }
 }

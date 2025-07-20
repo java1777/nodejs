@@ -1,20 +1,22 @@
-import express from "express";
-import { connectDB } from './db/index.js';
 import { config } from "dotenv";
-config();
-import authorRouter from './routes/author.route.js';
-import bookRouter from './routes/book.route.js';
-import orderRouter from './routes/order.route.js';
+import express from "express";
+import { connectDb } from "./db/index.js";
+import UserRouter from "./routes/user.route.js";
+import VideoRouter from "./routes/video.route.js";
+import CommentRouter from "./routes/comment.route.js";
+import SubscriptionRouter from "./routes/subscription.route.js"
+import { connect } from "mongoose";
 
-const PORT = +process.env.PORT;
+config();
+await connectDb();
+const PORT = Number(process.env.PORT);
 const app = express();
 
-app.use(express.json());
+app.use(express.json())
 
-await connectDB();
+app.use('/user', UserRouter)
+app.use('/video', VideoRouter)
+app.use('/comment', CommentRouter)
+app.use('/subscription', SubscriptionRouter)
 
-app.use('/author', authorRouter);
-app.use('/book', bookRouter);
-app.use('/order', orderRouter);
-
-app.listen(PORT, () => console.log('server running on port', PORT));
+app.listen(PORT, () => console.log('server running on port', PORT))
