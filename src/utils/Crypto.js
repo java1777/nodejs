@@ -1,13 +1,14 @@
-import { hash, compare } from 'bcrypt';
+import { compare, hash, genSalt } from 'bcrypt'
 
-class Crypto {
+class Crypt {
     async encrypt(data) {
-        return hash(data, 7);
+        const saltRounds = 10
+        const salt = await genSalt(saltRounds)
+        return await hash(data, salt)
     }
-
-    async decrypt(data, encryptedData) {
-        return compare(data, encryptedData);
+    async decrypt(data, encryptData) {
+        return compare(data, encryptData)
     }
 }
 
-export default new Crypto();
+export default new Crypt();

@@ -1,22 +1,29 @@
-import Admin from '../models/admin.model.js';
-import crypto from '../utils/Crypto.js';
-import { connectDB } from '../db/index.js';
-import { disconnect } from 'mongoose';
-import config from '../config/index.js';
+import { disconnect } from 'mongoose'
+
+import { configServer } from '../config/server.config.js'
+import { connectDB } from '../db/index.js'
+import crypt from '../utils/Crypto.js'
+import { Admin } from '../models/admin.model.js'
 
 (async function () {
     try {
+        console.clear()
         await connectDB();
-        const hashedPassword = await crypto.encrypt(config.SUPERADMIN_PASSWORD)
+        const role = await Admin.findOne({ role: 'SUPERADMIN' })
+        if (role) {
+            console.log('This SUPERADMIN already added')
+            return
+        }
+        const hashPassword = await crypt.encrypt(configServer.ADMIN.SUPERADMIN_PASSWORD)
         await Admin.create({
-            username: config.SUPERADMIN_USERNAME,
-            email: config.SUPERADMIN_EMAIL,
-            hashedPassword,
+            username: configServer.ADMIN.SUPERADMIN_USERNAME,
+            email: configServer.ADMIN.SUPERADMIN_EMAIL,
+            hashPassword,
             role: 'SUPERADMIN'
-        });
-        console.log('Super admin success created');
-        await disconnect();
+        })
+        console.log('Super admin created :)');
+        await disconnect()
     } catch (error) {
-        console.log('Error on creating super amdin', error);
+
     }
-}());
+}())
