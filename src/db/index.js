@@ -1,12 +1,12 @@
 import { connect } from "mongoose";
-import config from "../config/index.js";
+import { configServer } from '../config/index.js'
 
-export async function connectDB(){
+export const connectDB = async () => {
     try {
-        await connect(config.MONGO_URI);
-        console.log('Database connected');
+        await connect(configServer.mongodb_url);
+        console.log('Server connect to Database');
     } catch (error) {
-        console.log('Error on connecting to database', error);
-        process.exit(1);
+        console.log('Error to connect Database', error.message);
+        process.exit(1)
     }
 }
