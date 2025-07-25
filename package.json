@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch main.js"
+    "dev": "node --watch src/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,15 @@
     "url": "https://github.com/java1777/nodejs/issues"
   },
   "homepage": "https://github.com/java1777/nodejs#readme",
-  "description": "",
   "dependencies": {
-    "dotenv": "^17.2.0",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "joi": "^17.13.3",
-    "mongoose": "^8.16.4"
-  }
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.5",
+    "nodemon": "^3.1.10"
+  },
+  "description": ""
 }
