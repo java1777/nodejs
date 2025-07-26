@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch main.js"
+    "dev": "node --watch src/server.js",
+    "superadmin": "node src/helpers/create-super-admin.js"
   },
   "repository": {
     "type": "git",
