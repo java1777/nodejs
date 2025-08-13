@@ -1,10 +1,7 @@
 import { config } from "dotenv";
-config();
+config()
 
-export default {
-    PORT: Number(process.env.PORT),
-    MONGO_URI: String(process.env.MONGO_URI),
-    SUPERADMIN_USERNAME: String(process.env.SUPERADMIN_USERNAME),
-    SUPERADMIN_PASSWORD: String(process.env.SUPERADMIN_PASSWORD),
-    SUPERADMIN_EMAIL: String(process.env.SUPERADMIN_EMAIL)
+export const configFile = {
+    PORT: process.env.PORT,
+    DATABASE: process.env.POSTGRES_DB
 }

@@ -1,12 +1,10 @@
-import { connect } from "mongoose";
-import config from "../config/index.js";
+import { Pool } from "pg";
+import { configFile } from "../config/index.js";
 
-export async function connectDB(){
-    try {
-        await connect(config.MONGO_URI);
-        console.log('Database connected');
-    } catch (error) {
-        console.log('Error on connecting to database', error);
-        process.exit(1);
-    }
-}
+export const connectDB = new Pool({
+    connectionString: configFile.DATABASE
+})
+
+connectDB.on('error', (error) => {
+    console.log('Error on connect Databasae', error);
+})

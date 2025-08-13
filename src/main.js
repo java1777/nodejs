@@ -1,15 +1,17 @@
-import express from 'express';
-import config from './config/index.js';
-import { connectDB } from './db/index.js';
-import router from './routes/index.routes.js';
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import { configFile } from './config/index.js'
+import router from './router/index.route.js';
+import { errorHandle } from './middlewares/error.middleware.js';
 
-const app = express();
-const PORT = config.PORT || 2000;
+const server = new Koa();
 
-app.use(express.json());
+server.use(bodyParser())
+server.use(errorHandle)
 
-await connectDB();
+server.use(router.routes())
+    .use(router.allowedMethods())
 
-app.use('/api', router);
 
-app.listen(PORT, () => console.log('Server running on port', PORT));
+const PORT = +configFile.PORT
+server.listen(PORT, () => console.log('Server is runing PORT: ', PORT))
