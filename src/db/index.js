@@ -1,12 +1,17 @@
-import { connect } from "mongoose";
-import config from "../config/index.js";
+import { Sequelize } from "sequelize";
+import { envConfig } from "../config/env.config.js";
 
-export async function connectDB(){
-    try {
-        await connect(config.MONGO_URI);
-        console.log('Database connected');
-    } catch (error) {
-        console.log('Error on connecting to database', error);
-        process.exit(1);
+const sequelize = new Sequelize(
+    String(envConfig.DB.DATABASE),
+    String(envConfig.DB.USERNAME),
+    String(envConfig.DB.PASS),
+    {
+        host: envConfig.DB.HOST,
+        port: envConfig.DB.PORT,
+        dialect: envConfig.DB.DIALECT,
+        logging: false
     }
-}
+
+)
+
+export default sequelize;
